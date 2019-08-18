@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'ProjectForEsternPeak'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile  group: 'org.testng', name: 'testng', version: '6.13.1'
+    testCompile 'org.seleniumhq.selenium:selenium-java:3.141.59'
+}
+
+task seleniumTest(type:Test) {
+    systemProperty "driver", "selenium"
+    useTestNG() {
+        scanForTestClasses = false
+        suites "testngselenium.xml"
+    }
+}
+task appiumTest(type:Test) {
+    systemProperty "driver", "appium"
+    useTestNG() {
+        scanForTestClasses = false
+        suites "testngappium.xml"
+    }
+}
